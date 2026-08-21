@@ -20,6 +20,15 @@ export const seedProjects: Project[] = [
         date: '2026-08-21',
       },
     ],
+    updates: [
+      {
+        id: 'illume-u1',
+        health: 'On track',
+        summary: 'A base local continua estável enquanto a próxima etapa foca voz, permissões e identidade.',
+        next: 'Validar o novo fluxo de ação com confirmação explícita antes de ampliar automações.',
+        date: '2026-08-21',
+      },
+    ],
     timeline: [
       { id: 'illume-t1', label: 'Projeto renomeado para Illume', date: '2026-08-21', kind: 'decision' },
       { id: 'illume-t2', label: 'Living Core v1.0.2', date: '2026-08-20', kind: 'release' },
@@ -42,6 +51,15 @@ export const seedProjects: Project[] = [
         title: 'Campanha finita + desafio infinito',
         note: 'A história continua autoral enquanto um modo de domínio sustenta replay e pontuação.',
         date: '2026-08-15',
+      },
+    ],
+    updates: [
+      {
+        id: 'requiem-u1',
+        health: 'At risk',
+        summary: 'A plataforma rítmica avançou, mas o feeling ainda não foi validado em um playtest real no Godot.',
+        next: 'Não promover o sistema para a campanha até confirmar build e testar movimento, timing e telegraphs.',
+        date: '2026-08-21',
       },
     ],
     timeline: [
@@ -68,6 +86,15 @@ export const seedProjects: Project[] = [
         date: '2026-08-18',
       },
     ],
+    updates: [
+      {
+        id: 'sincrohub-u1',
+        health: 'On track',
+        summary: 'A arquitetura está clara e o próximo ganho real vem de tornar o histórico operacional mais útil.',
+        next: 'Priorizar ingestão, correlação e contexto de incidentes antes de expandir dashboards.',
+        date: '2026-08-19',
+      },
+    ],
     timeline: [
       { id: 'sincrohub-t1', label: 'README e arquitetura consolidados', date: '2026-08-18', kind: 'release' },
     ],
@@ -88,6 +115,15 @@ export const seedProjects: Project[] = [
         id: 'manopla-d1',
         title: 'Firmware antes da estética final',
         note: 'Priorizar telemetria, protocolo e integração antes de investir em acabamento físico.',
+        date: '2026-08-17',
+      },
+    ],
+    updates: [
+      {
+        id: 'manopla-u1',
+        health: 'At risk',
+        summary: 'O desenho digital está organizado, mas a principal incerteza ainda é física: ergonomia, montagem e sensores.',
+        next: 'Construir uma primeira validação de bancada antes de aprofundar carcaça e acabamento.',
         date: '2026-08-17',
       },
     ],
