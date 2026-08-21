@@ -1,0 +1,18 @@
+.project-card-signals { display: inline-flex; align-items: center; gap: 9px; }
+.health-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; background: #66707a; box-shadow: 0 0 12px rgba(102,112,122,.35); }
+.health-on-track { background: #8bf0c8; box-shadow: 0 0 14px rgba(139,240,200,.38); }
+.health-at-risk { background: #f3c46f; box-shadow: 0 0 14px rgba(243,196,111,.34); }
+.health-off-track { background: #ff6f62; box-shadow: 0 0 14px rgba(255,111,98,.34); }
+.health-no-update { background: #69727c; }
+.health-pill { border: 1px solid #313840; border-radius: 999px; padding: 6px 9px; font-size: .68rem; color: #9ba4ad; white-space: nowrap; }
+.update-form { display: grid; gap: 9px; margin: 18px 0 20px; }
+.update-form .primary { justify-self: start; }
+.health-picker { display: flex; flex-wrap: wrap; gap: 7px; }
+.health-picker button { background: #101317; color: #7f8993; border: 1px solid #2c333a; border-radius: 999px; padding: 7px 10px; cursor: pointer; }
+.health-picker button.selected { color: #f3f2ed; border-color: #535e68; background: #1b2025; }
+.update-history { display: grid; }
+.update-history article { border-top: 1px solid #292e35; padding: 17px 0 3px; }
+.update-history article > div { display: flex; gap: 9px; align-items: center; margin-bottom: 7px; }
+.update-history time { color: #69727c; font-size: .72rem; }
+.update-history strong { display: block; line-height: 1.45; }
+.update-history p { color: #8f98a2; line-height: 1.5; margin: 6px 0 0; }
