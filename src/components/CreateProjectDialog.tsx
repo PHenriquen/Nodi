@@ -31,6 +31,7 @@ export function CreateProjectDialog({ onClose, onCreate }: CreateProjectDialogPr
       accent,
       links: [],
       decisions: [],
+      updates: [],
       timeline: [{ id: crypto.randomUUID(), label: 'Projeto criado no Nodi', date: now, kind: 'milestone' }],
     });
   }
