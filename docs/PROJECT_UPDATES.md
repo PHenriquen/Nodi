@@ -33,4 +33,11 @@ The transferable principle is **signal + explanation + history**. Nodi intention
 
 ## Next validation
 
-Before reminders, Slack delivery, AI summaries, or automatic staleness scoring, validate whether users naturally post updates when a project changes. If the behavior is useful, the next narrow extension is a stale-context indicator based on the **date of the last authored update**, without changing its health automatically.
+Before reminders, Slack delivery or summaries, validate whether users naturally post updates when a project changes. The workspace now provides a stale-context indicator based on the **date of the last authored update**, without changing its health automatically:
+
+- current: up to 14 days;
+- aging: 15–30 days;
+- stale: more than 30 days;
+- missing: no valid authored update.
+
+This signal only asks for attention. It never changes `On track`, `At risk`, or `Off track`, because age and project health answer different questions.

@@ -48,7 +48,7 @@ h3 { letter-spacing: -.025em; }
 .secondary { background: #171b1f; border: 1px solid #30363e; padding: 10px 14px; }
 .ghost { border: 0; background: transparent; font-size: 1.5rem; color: #8d96a0; }
 
-.metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 26px; }
+.metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 26px; }
 .metric-grid article { border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(145deg, #15191d, #101316); padding: 22px; display: grid; gap: 5px; }
 .metric-grid small { color: #717a84; letter-spacing: .12em; font-size: .66rem; }
 .metric-grid strong { font-size: 2rem; letter-spacing: -.04em; }
@@ -58,6 +58,8 @@ h3 { letter-spacing: -.025em; }
 .search-box input { flex: 1; border: 0; outline: none; background: transparent; color: var(--text); }
 .project-toolbar select { background: #121519; color: #bbc1c7; border: 1px solid var(--line); border-radius: 11px; padding: 0 14px; }
 .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 13px; }
+.project-empty { grid-column: 1 / -1; min-height: 180px; border: 1px dashed #30373e; border-radius: 17px; display: grid; place-content: center; gap: 7px; padding: 24px; text-align: center; color: #9ba3ac; }
+.project-empty span { color: #707984; font-size: .82rem; }
 .project-card { min-height: 312px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; background: linear-gradient(145deg, #15191d, #101316 70%); border: 1px solid var(--line); border-radius: 17px; padding: 22px; cursor: pointer; transition: transform .18s ease, border-color .18s ease, background .18s ease; }
 .project-card:hover { transform: translateY(-2px); border-color: #3a424c; background: #161b1f; }
 .project-card-head { display: flex; justify-content: space-between; }
@@ -147,7 +149,8 @@ h3 { letter-spacing: -.025em; }
   .sidebar-note { display: none; }
   .content { grid-column: auto; }
   .page { padding: 38px 20px 60px; }
-  .metric-grid, .project-grid { grid-template-columns: 1fr; }
+  .metric-grid { grid-template-columns: repeat(2, 1fr); }
+  .project-grid { grid-template-columns: 1fr; }
   .detail-grid { grid-template-columns: 1fr; }
 }
 
@@ -158,6 +161,7 @@ h3 { letter-spacing: -.025em; }
   .page-header, .detail-header { align-items: stretch; flex-direction: column; }
   .project-toolbar { flex-direction: column; }
   .project-toolbar select { height: 42px; }
+  .metric-grid { grid-template-columns: 1fr; }
   .decision-list > div { grid-template-columns: 1fr; }
   .decision-list time { grid-row: auto; margin-bottom: 6px; }
 }

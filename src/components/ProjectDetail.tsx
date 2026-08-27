@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Project, ProjectHealth, ProjectStatus } from '../types';
-import { getProjectHealth } from '../types';
+import { getProjectContextState, getProjectHealth } from '../types';
 
 interface ProjectDetailProps {
   project: Project;
@@ -68,6 +68,14 @@ export function ProjectDetail({ project, onBack, onChange }: ProjectDetailProps)
   }
 
   const latestUpdate = project.updates[0];
+  const context = getProjectContextState(project);
+  const contextMessage = context.freshness === 'missing'
+    ? 'Este projeto ainda não tem contexto publicado.'
+    : context.freshness === 'aging'
+      ? `O último contexto tem ${context.daysSinceUpdate} dias. Vale confirmar se ele ainda representa o projeto.`
+      : context.freshness === 'stale'
+        ? `O último contexto tem ${context.daysSinceUpdate} dias e pode não representar mais o projeto.`
+        : null;
 
   if (preview) {
     return (
@@ -103,6 +111,7 @@ export function ProjectDetail({ project, onBack, onChange }: ProjectDetailProps)
         <div className="detail-main">
           <article className="panel-card">
             <div className="section-head"><div><p className="eyebrow">PULSE</p><h2>Project update</h2></div><span className={`health-pill health-${getProjectHealth(project).toLowerCase().replaceAll(' ', '-')}`}>{getProjectHealth(project)}</span></div>
+            {contextMessage && <div className={`context-notice context-${context.freshness}`}><strong>Context check</strong><span>{contextMessage}</span></div>}
             <form className="update-form" onSubmit={addUpdate}>
               <div className="health-picker">{healthOptions.map((health) => <button type="button" key={health} className={updateHealth === health ? 'selected' : ''} onClick={() => setUpdateHealth(health)}>{health}</button>)}</div>
               <textarea rows={3} value={updateSummary} onChange={(event) => setUpdateSummary(event.target.value)} placeholder="O que mudou desde o último update?" />

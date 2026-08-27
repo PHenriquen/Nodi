@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import type { Project } from '../types';
+import { getProjectContextState } from '../types';
 import { ProjectCard } from './ProjectCard';
 
 interface DashboardProps {
@@ -12,6 +13,7 @@ interface DashboardProps {
 export function Dashboard({ projects, mode, onOpen, onCreate }: DashboardProps) {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('All');
+  const [contextFilter, setContextFilter] = useState<'all' | 'attention'>('all');
 
   const categories = useMemo(
     () => ['All', ...Array.from(new Set(projects.map((project) => project.category)))],
@@ -20,7 +22,10 @@ export function Dashboard({ projects, mode, onOpen, onCreate }: DashboardProps) 
 
   const filtered = projects.filter((project) => {
     const matchesQuery = `${project.name} ${project.category} ${project.tagline}`.toLowerCase().includes(query.toLowerCase());
-    return matchesQuery && (category === 'All' || project.category === category);
+    const matchesCategory = category === 'All' || project.category === category;
+    const freshness = getProjectContextState(project).freshness;
+    const matchesContext = contextFilter === 'all' || freshness !== 'current';
+    return matchesQuery && matchesCategory && matchesContext;
   });
 
   const activity = projects
@@ -52,6 +57,7 @@ export function Dashboard({ projects, mode, onOpen, onCreate }: DashboardProps) 
 
   const average = projects.length ? Math.round(projects.reduce((sum, project) => sum + project.progress, 0) / projects.length) : 0;
   const active = projects.filter((project) => ['Building', 'Testing'].includes(project.status)).length;
+  const contextDue = projects.filter((project) => getProjectContextState(project).freshness !== 'current').length;
 
   return (
     <section className="page">
@@ -69,6 +75,7 @@ export function Dashboard({ projects, mode, onOpen, onCreate }: DashboardProps) 
           <article><small>PROJECTS</small><strong>{projects.length}</strong><span>em um único workspace</span></article>
           <article><small>ACTIVE</small><strong>{active}</strong><span>em construção ou teste</span></article>
           <article><small>AVG. PROGRESS</small><strong>{average}%</strong><span>visão simples, não promessa</span></article>
+          <article><small>CONTEXT DUE</small><strong>{contextDue}</strong><span>sem update recente</span></article>
         </div>
       )}
 
@@ -80,10 +87,19 @@ export function Dashboard({ projects, mode, onOpen, onCreate }: DashboardProps) 
         <select value={category} onChange={(event) => setCategory(event.target.value)}>
           {categories.map((item) => <option key={item}>{item}</option>)}
         </select>
+        <select value={contextFilter} onChange={(event) => setContextFilter(event.target.value as 'all' | 'attention')} aria-label="Filtrar contexto">
+          <option value="all">Todo contexto</option>
+          <option value="attention">Precisa de update</option>
+        </select>
       </div>
 
       <div className="project-grid">
-        {filtered.map((project) => <ProjectCard key={project.id} project={project} onOpen={onOpen} />)}
+        {filtered.length ? filtered.map((project) => <ProjectCard key={project.id} project={project} onOpen={onOpen} />) : (
+          <div className="project-empty">
+            <strong>Nenhum projeto neste recorte.</strong>
+            <span>{contextFilter === 'attention' ? 'O contexto dos projetos está em dia.' : 'Tente ajustar a busca ou os filtros.'}</span>
+          </div>
+        )}
       </div>
     </section>
   );
