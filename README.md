@@ -13,6 +13,8 @@ Instead of trying to replace GitHub or a task manager, the first MVP focuses on 
 - project detail with status and progress;
 - next milestone editing;
 - decision log with rationale;
+- authored health updates with a context history;
+- stale-context signals and an attention filter;
 - lightweight timeline;
 - public-page preview;
 - local persistence through `localStorage`;

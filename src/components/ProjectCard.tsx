@@ -1,4 +1,5 @@
 import type { Project } from '../types';
+import { getProjectContextState, getProjectHealth } from '../types';
 
 interface ProjectCardProps {
   project: Project;
@@ -6,11 +7,19 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, onOpen }: ProjectCardProps) {
+  const health = getProjectHealth(project);
+  const healthClass = health.toLowerCase().replaceAll(' ', '-');
+  const context = getProjectContextState(project);
+
   return (
     <button className="project-card" onClick={() => onOpen(project)}>
       <div className="project-card-head">
         <span className="project-dot" style={{ background: project.accent }} />
-        <span className={`status status-${project.status.toLowerCase()}`}>{project.status}</span>
+        <div className="project-card-signals">
+          {context.freshness !== 'current' && <span className={`context-chip context-${context.freshness}`}>{context.freshness === 'missing' ? 'No context' : `${context.daysSinceUpdate}d`}</span>}
+          <span className={`health-dot health-${healthClass}`} />
+          <span className={`status status-${project.status.toLowerCase()}`}>{project.status}</span>
+        </div>
       </div>
       <div>
         <p className="eyebrow">{project.category}</p>
@@ -22,8 +31,8 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
         <small>{project.progress}%</small>
       </div>
       <div className="project-next">
-        <small>PRÓXIMO</small>
-        <span>{project.nextMilestone}</span>
+        <small>{health.toUpperCase()}</small>
+        <span>{project.updates[0]?.summary ?? project.nextMilestone}</span>
       </div>
     </button>
   );
